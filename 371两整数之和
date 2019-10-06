@@ -1,0 +1,18 @@
+不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。
+
+示例 1:
+输入: a = 1, b = 2
+输出: 3 
+
+int getSum(int a, int b){
+    int sum;
+    int carry;
+    sum=a^b;
+    carry=((unsigned int)a&b)<<1;
+    if(carry!=0)
+    {
+        return getSum( sum,  carry);
+    }
+    return sum;
+}
+
