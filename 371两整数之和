@@ -2,8 +2,8 @@
 
 示例 1:
 输入: a = 1, b = 2
-输出: 3 
-
+输出: 3
+ 
 int getSum(int a, int b){
     int sum;
     int carry;
@@ -15,4 +15,3 @@ int getSum(int a, int b){
     }
     return sum;
 }
-
