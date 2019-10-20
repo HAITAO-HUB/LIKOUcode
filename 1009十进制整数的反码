@@ -9,7 +9,7 @@
 输出：0
 解释：7 的二进制表示为 "111"，其二进制反码为 "000"，也就是十进制中的 0 。
 
-int bitwiseComplement(int N){
+int bitwiseComplement(int N){//位运算
     if(N==0)
     {
         return 1;
@@ -23,4 +23,14 @@ int bitwiseComplement(int N){
         b>>=1;
     }
     return N;
+}
+
+
+int bitwiseComplement(int N){//求出比N大的最小二次幂减一后与N异或
+    int a=2;
+    while(a<=N)
+    {
+        a<<=1;
+    }
+    return N^(a-1);
 }
