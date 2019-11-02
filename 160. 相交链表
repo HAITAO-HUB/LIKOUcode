@@ -32,22 +32,15 @@ public class Solution {
         if(len<0){
             pL=headB;
             pS=headA;
+            len=lenB-lenA;
         }
         else{
              pS=headB;
             pL=headA;
         }
-        if(len>0){
         while(len>0){
             pL=pL.next;
             len--;
-        }
-        }
-        else{
-             while(len<0){
-            pL=pL.next;
-            len++;
-        }
         }
         while(pL!=pS&&pL.next!=null){
             pL=pL.next;
