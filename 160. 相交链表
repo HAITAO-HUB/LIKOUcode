@@ -1,0 +1,61 @@
+编写一个程序，找到两个单链表相交的起始节点。
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA==null||headB==null){
+            return null;
+        }
+        ListNode pL=headA;
+        ListNode pS=headB;
+        int lenA=0;
+        int lenB=0;
+        while(headA!=null&&pL.next!=null){
+            lenA++;
+            pL=pL.next;
+        }
+        while(headB!=null&&pS.next!=null){
+            lenB++;
+            pS=pS.next;
+        }
+        int len=lenA-lenB;
+        if(len<0){
+            pL=headB;
+            pS=headA;
+        }
+        else{
+             pS=headB;
+            pL=headA;
+        }
+        if(len>0){
+        while(len>0){
+            pL=pL.next;
+            len--;
+        }
+        }
+        else{
+             while(len<0){
+            pL=pL.next;
+            len++;
+        }
+        }
+        while(pL!=pS&&pL.next!=null){
+            pL=pL.next;
+            pS=pS.next;
+        }
+        if(pL==pS)
+        return pL;
+        else
+         return null;
+    }
+}
