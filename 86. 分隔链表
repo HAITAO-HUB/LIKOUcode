@@ -1,0 +1,53 @@
+给定一个链表和一个特定值 x，对链表进行分隔，
+使得所有小于 x 的节点都在大于或等于 x 的节点之前。
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode beforeStart=null;
+        ListNode beforeEnd=null;
+        ListNode afterStart=null;
+        ListNode afterEnd=null;
+        ListNode cur=head;
+        while(cur!=null){
+           ListNode curNext=cur.next;
+            cur.next=null;
+            if(cur.val<x){
+                if(beforeStart==null){
+                    beforeStart=cur;
+                    beforeEnd=beforeStart;
+                }else{
+                    beforeEnd.next=cur;
+                    beforeEnd=beforeEnd.next;
+                }
+            }
+            else{
+                if(afterStart==null){
+                     afterStart=cur;
+                     afterEnd=afterStart;
+                }
+                else{
+                    afterEnd.next=cur;
+                    afterEnd=afterEnd.next;
+                }
+            }
+            cur=curNext;
+        }
+        
+        if(afterStart==null){
+            return beforeStart;
+        }
+        if(beforeEnd==null){
+            return afterStart;
+        }
+        beforeEnd.next=afterStart;
+        return beforeStart;
+    }
+}
