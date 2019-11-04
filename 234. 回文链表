@@ -1,0 +1,43 @@
+请判断一个链表是否为回文链表
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head==null||head.next==null){
+            return true;
+        }
+        ListNode fast=head;
+        ListNode slow=head;
+        while(fast!=null&&fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+         ListNode p=slow.next;
+        while(p!=null){
+            ListNode pNext=p.next;
+            p.next=slow;
+            slow=p;
+            p=pNext;
+        }
+        while(head!=slow||head.next!=slow){
+            if(head.val!=slow.val){
+                return false;
+            }
+            if(slow.next!=null){
+             head=head.next;
+             slow=slow.next;
+            }else{
+                    return false;
+            }
+        }
+        return true;
+    }
+}
