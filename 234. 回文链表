@@ -27,17 +27,16 @@ class Solution {
             slow=p;
             p=pNext;
         }
-        while(head!=slow||head.next!=slow){
+        while(head!=slow&&head.next!=slow){
             if(head.val!=slow.val){
                 return false;
             }
-            if(slow.next!=null){
              head=head.next;
              slow=slow.next;
-            }else{
-                    return false;
-            }
         }
+        if(head.val==slow.val){
         return true;
+        }else
+            return false;
     }
 }
