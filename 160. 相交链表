@@ -20,11 +20,11 @@ public class Solution {
         ListNode pS=headB;
         int lenA=0;
         int lenB=0;
-        while(pL.next!=null){
+        while(pL!=null){
             lenA++;
             pL=pL.next;
         }
-        while(pS.next!=null){
+        while(pS!=null){
             lenB++;
             pS=pS.next;
         }
