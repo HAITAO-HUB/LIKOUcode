@@ -1,0 +1,21 @@
+特殊的斐波那契数
+
+
+class Solution {
+    public int climbStairs(int n) {
+	int k = 0;
+	int a1 = 1;
+	int a2 = 2;
+        if(n<=2){
+            return n;
+        }
+        while (n > 2)   
+		{
+		k = a1 + a2;
+		a1 = a2;
+		a2 = k;
+		n--;
+		}
+        return k;
+    }
+}
