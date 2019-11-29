@@ -1,0 +1,52 @@
+反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
+
+说明:
+1 ≤ m ≤ n ≤ 链表长度。
+
+示例:
+
+输入: 1->2->3->4->5->NULL, m = 2, n = 4
+输出: 1->4->3->2->5->NULL
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(m<1||n<1){
+            return null;
+        }
+        ListNode cur = head;
+        ListNode top = null, end = null;
+        int len = 0;
+        while(cur != null) {
+            len++;
+            top = (len == (m - 1)) ? cur : top;
+            end = (len == (n + 1)) ? cur : end;
+            cur = cur.next;
+        }
+
+        if(len == 1) 
+        return head;
+        ListNode nodeH = top == null ? head : top.next, next = null;
+        len = n - m;
+        while(len >= 0) {
+            next = nodeH.next;
+            // 将反转后的链表的最后一个节点链接到 end 上
+            nodeH.next = end;
+            end = nodeH;
+            nodeH = next;
+            len--;
+        }
+        // 将反转后的链表链接到 top 上
+        if(top == null)
+         return end;
+        else top.next = end; 
+        return head;
+    }
+}
