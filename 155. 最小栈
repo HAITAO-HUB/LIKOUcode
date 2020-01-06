@@ -6,7 +6,7 @@ class MinStack {
         a=new Stack<>();
         b=new Stack<>();
     }
-    
+    /*数据栈和辅助栈同步
     public void push(int x) {
         a.push(x);
         if(b.empty()||x<=b.peek()){
@@ -22,7 +22,21 @@ class MinStack {
             a.pop();
         }
     }
+    */
+	//数据栈和辅助栈不同步
+	public void push(int x) {
+        a.push(x);
+        if(b.empty()||x<=b.peek()){
+            b.push(x);
+        }
+    }
     
+    public void pop() {
+        if (a.peek().equals(b.peek())){
+            b.pop();
+        }
+        a.pop();
+    }
     public int top() {
         if(!a.empty())
         return a.peek();
