@@ -1,0 +1,45 @@
+class MinStack {
+    private Stack<Integer> a;//存放数据
+    private Stack<Integer> b;//存放最小值
+    /** initialize your data structure here. */
+    public MinStack() {
+        a=new Stack<>();
+        b=new Stack<>();
+    }
+    
+    public void push(int x) {
+        a.push(x);
+        if(b.empty()||x<=b.peek()){
+            b.push(x);
+        }else{
+            b.push(b.peek());
+        }
+    }
+    
+    public void pop() {
+        if (!a.isEmpty()) {
+            b.pop();
+            a.pop();
+        }
+    }
+    
+    public int top() {
+        if(!a.empty())
+        return a.peek();
+        throw new RuntimeException("栈中元素为空，此操作非法");
+    }
+    
+    public int getMin() {
+    if(!b.empty())
+    return b.peek();
+    throw new RuntimeException("栈中元素为空，此操作非法");
+    }
+}
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
