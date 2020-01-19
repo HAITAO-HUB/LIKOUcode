@@ -1,0 +1,7 @@
+给定一个 Weather 表，编写一个 SQL 查询，来查找与之前（昨天的）日期相比温度更高的所有日期的 Id。
+
+
+SELECT b.Id
+FROM Weather as a,Weather as b
+WHERE a.Temperature < b.Temperature and DATEDIFF(a.RecordDate,b.RecordDate) = -1;
+DATEDIFF是两个日期的天数差集
