@@ -1,0 +1,21 @@
+给定一个字符串 S，返回 “反转后的” 字符串，其中不是字母的字符都保留在原地，而所有字母的位置发生反转。
+
+
+
+class Solution {
+    public String reverseOnlyLetters(String S) {
+        StringBuilder arr = new StringBuilder();
+        int n = S.length() - 1;
+        for (int i = 0; i < S.length(); ++i) {
+            if (Character.isLetter(S.charAt(i))) {
+                while (!Character.isLetter(S.charAt(n))){
+                       n--;
+                }
+                arr.append(S.charAt(n--));
+            } else {
+                arr.append(S.charAt(i));
+            }
+        }
+        return arr.toString();
+     }
+}
