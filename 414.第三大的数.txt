@@ -1,0 +1,41 @@
+给定一个非空数组，返回此数组中第三大的数。如果不存在，则返回数组中最大的数。要求算法时间复杂度必须是O(n)。
+
+
+
+class Solution {
+    public int thirdMax(int[] nums) {
+         int L=Integer.MIN_VALUE;
+         int M=L;
+         int S=L;
+         boolean flag=false;
+         for(int i:nums){
+             if(i>L){
+                 if(M>Integer.MIN_VALUE){
+                     flag=true;
+                 }
+                 S=M;
+                 M=L;
+                 L=i;
+             }else if(i>M){
+                 if(i==L){
+                     continue;
+                 }
+                 if(M>Integer.MIN_VALUE){
+                     flag=true;
+                 }
+                 S=M;
+                 M=i;
+             }else if(i>=S){
+                 if(i==M&&i>Integer.MIN_VALUE){
+                     continue;
+                 }
+                 S=i;
+                 flag=true;
+             }
+         }
+         if(M==Integer.MIN_VALUE||!flag){
+                 return L;
+             }
+         return S;
+    }
+}
