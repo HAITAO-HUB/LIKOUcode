@@ -1,0 +1,22 @@
+给定一个二叉树，返回它的中序 遍历。
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    List<Integer> arr =new ArrayList<>();
+    public List<Integer> inorderTraversal(TreeNode root) {
+        if(root!=null){
+            inorderTraversal(root.left);
+            arr.add(root.val);
+            inorderTraversal(root.right);
+        }
+        return arr;
+    }
+}
