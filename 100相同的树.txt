@@ -1,0 +1,26 @@
+给定两个二叉树，编写一个函数来检验它们是否相同。
+
+
+/**
+* Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null&&q==null){
+            return true;
+        }
+           if(p==null||q==null){
+               return false;
+           }
+           if(q.val!=p.val){
+               return false;
+           }
+           return isSameTree(q.left,p.left)&&isSameTree(q.right,p.right);
+    }
+}
