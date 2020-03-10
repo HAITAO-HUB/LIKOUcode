@@ -1,0 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int index=0;
+    private TreeNode rebuildTree(int[] inorder,int left,int right,int[] postorder){
+          if(index<0||left>=right){
+            return null;
+        }
+        //根节点postorder[index]
+        //在中序遍历结果中确定根节点位置
+        int rootIdx=left;
+        while(rootIdx<right){
+            if(inorder[rootIdx]==postorder[index])
+                break;
+                ++rootIdx;
+        }
+            //创建树的根节点
+            TreeNode root=new TreeNode(postorder[index]);
+            --index;
+            //创建根节点的右子树
+            root.right=rebuildTree(inorder,rootIdx+1,right,postorder);
+            //创建根节点左子树
+            root.left=rebuildTree(inorder,left,rootIdx,postorder);
+            return root;
+            
+    }
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        index=postorder.length-1;
+        return rebuildTree(inorder,0,inorder.length,postorder);
+    }
+}
