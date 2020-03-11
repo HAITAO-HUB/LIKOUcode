@@ -1,0 +1,36 @@
+输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+
+ 
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int index=0;
+    private TreeNode rebuildTree(int[] preorder,int[] inorder,int left,int right){
+        if(index>=preorder.length||left>=right){
+            return null;
+        }
+        int rootIdx=left;
+        while(rootIdx<right){
+            if(preorder[index]==inorder[rootIdx])
+            break;
+            rootIdx++;
+        }
+        TreeNode root=new TreeNode(inorder[rootIdx]);
+        index++;
+        root.left=rebuildTree(preorder,inorder,left,rootIdx);
+        root.right=rebuildTree(preorder,inorder,rootIdx+1,right);
+        return root;
+    }
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return rebuildTree(preorder,inorder,0,preorder.length);
+    }
+}
