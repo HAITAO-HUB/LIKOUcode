@@ -1,0 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA==null||headB==null){
+            return null;
+        }
+        int countA=0;
+        int countB=0;
+        ListNode curF=headA;
+        ListNode curS=headB;
+        while(curF!=null){
+            countA++;
+            curF=curF.next;
+        }
+        while(curS!=null){
+            countB++;
+            curS=curS.next;
+        }
+       int count=countA-countB;
+        if(count>0){
+            curF=headA;
+            curS=headB;
+        }
+        else{
+            count=0-count;
+            curF=headB;
+            curS=headA;
+        }
+        while(count!=0){
+            curF=curF.next;
+            count--;
+        }
+        while(curF!=curS&&curS!=null){
+            curS=curS.next;
+            curF=curF.next;
+        }
+        return curS;
+    }
+}
