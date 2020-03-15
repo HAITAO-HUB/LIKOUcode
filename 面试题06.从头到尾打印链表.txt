@@ -1,0 +1,30 @@
+输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int[] reversePrint(ListNode head) {
+        Stack<Integer> ret=new Stack<>();
+        ListNode cur=head;
+        int cnt=0;
+        while(cur!=null){
+            ret.push(cur.val);
+            cnt++;
+            cur=cur.next;
+        } 
+        int[] arr=new int[cnt];
+        int i=0;
+        while(!ret.isEmpty()){
+
+            arr[i]=ret.pop();
+            i++;
+        }
+        return arr;
+    }
+}
