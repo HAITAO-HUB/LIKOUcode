@@ -1,0 +1,64 @@
+给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+
+百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，
+满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean getNodePath(TreeNode root,TreeNode node,Stack<TreeNode> ret){
+        if(root==null){
+            return false;
+        }
+        ret.push(root);
+        if(root==node){
+            return true;
+        }
+        if(getNodePath(root.left,node,ret)||getNodePath(root.right,node,ret)){
+            return true;
+        }
+        ret.pop();
+        return false;
+    }
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null||p==null||q==null){
+            return null;
+        }
+        Stack<TreeNode> pStack=new Stack<>();
+        Stack<TreeNode> qStack=new Stack<>();
+        getNodePath(root,p,pStack);
+        getNodePath(root,q,qStack);
+        int sizeq=qStack.size();
+        int sizep=pStack.size();
+        while(sizeq!=0&&sizep!=0){
+            if(sizeq>sizep){
+                qStack.pop();
+                sizeq--;
+            }
+            else if(sizeq<sizep){
+                pStack.pop();
+                sizep--;
+            }
+            else{
+                if(pStack.peek()==qStack.peek()){
+                    return pStack.peek();
+                }
+                else{
+                    pStack.pop();
+                    qStack.pop();
+                }
+                sizep--;
+                sizeq--;
+            }
+        }
+        return null;
+    }
+}
