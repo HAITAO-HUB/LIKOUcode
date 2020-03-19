@@ -1,0 +1,20 @@
+class Solution {
+    public int[] smallestK(int[] arr, int k) {
+          if(arr==null||k<=0){
+            return new int[0];
+        }
+        PriorityQueue<Integer> s=new PriorityQueue<>(arr.length);
+        for(int i=0;i<arr.length;i++){
+            s.offer(arr[i]);
+        }
+        int[] ret=new int[k];
+        int j=0;
+        while(k!=0){
+            ret[j]=s.peek();
+            s.poll();
+            k--;
+            j++;
+        }
+        return ret;
+    }
+}
