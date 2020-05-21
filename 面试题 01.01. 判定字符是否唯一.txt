@@ -1,0 +1,22 @@
+实现一个算法，确定一个字符串 s 的所有字符是否全都不同。
+
+示例 1：
+
+输入: s = "leetcode"
+输出: false 
+
+class Solution {
+    public boolean isUnique(String astr) {
+        Set<Character> s=new HashSet();
+        int i=0;
+        for(;i<astr.length();i++){
+            if(!s.add(astr.charAt(i))){
+                break;
+            }
+        }
+        if(i<astr.length())
+        return false;
+        else
+        return true;
+    } 
+}
