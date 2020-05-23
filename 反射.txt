@@ -1,0 +1,140 @@
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class TestReflect {
+    //1、获取字节码文件对象（Class对象）
+    public static void test1() throws ClassNotFoundException {
+        //1、每个类中有一个class静态属性
+        Class<?> stuClass1=Student.class;
+        System.out.println(stuClass1);
+        //2、通过对象调用getClass()
+        Student stu=new Student("lwl","男",12);
+        Class<?> stuClass2=stu.getClass();
+        System.out.println(stuClass2);
+        //3、通过Class静态方法forName()
+        Class<?> stuClass3=Class.forName("Student");
+        System.out.println(stuClass3);
+
+        //三个stuClass是相同的，即：一个类最多会加载一次
+        System.out.println(stuClass1==stuClass2);
+        System.out.println(stuClass2==stuClass3);
+    }
+
+    //2、获取类的构造器对象  前提是：必须先获得类的字节码文件对象
+    public static void test2(){
+        try {
+            Class<?> stuClass=Class.forName("Student");
+
+            //获取构造器对象
+            Constructor<?>con=stuClass.getConstructor();
+            System.out.println(con);
+            Constructor<?>con1=stuClass.getConstructor(String.class,String.class,int.class);
+            System.out.println(con1);
+            Constructor<?>[] con2=stuClass.getDeclaredConstructors();
+            System.out.println(con2.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //3、通过构造器实例化对象
+    public static void test3(){
+        try {
+            Class<?> stu=Class.forName("Student");
+            Constructor<?> con=stu.getDeclaredConstructor(String.class);
+            //如果构造器是私有的，不能直接用来实例化对象
+            con.setAccessible(true);//将构造器访问权限设置为公有的
+            Student s=(Student)con.newInstance("jack");
+            System.out.println(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //反射属性
+    public static void test4(){
+        try {
+            Class<?> stu=Class.forName("Student");
+            Constructor<?> con=stu.getDeclaredConstructor(String.class);
+
+            //如果构造器是私有的，不能直接用来实例化对象
+            con.setAccessible(true);//将构造器访问权限设置为公有的
+            Student s=(Student)con.newInstance("jack");
+            System.out.println(s);
+
+            //反射Student属性
+            //抛异常：name是私有的，fetField()获得的是公有属性
+            //Field[] fields1=stu.getFields();
+            //System.out.println("公有属性: "+fields1.length);
+
+            //抛异常：name是私有的，fetField()获得的是公有属性
+            //Field name1=stu.getField("name");
+            //System.out.println(name1);
+
+            Field[] fields2=stu.getDeclaredFields();
+            System.out.println(fields2.length);
+
+            Field gender=stu.getDeclaredField("gender");
+            System.out.println(gender);
+
+            //修改gender属性-->修改哪个实例的属性：s
+            gender.setAccessible(true);
+            gender.set(s,"人妖");
+            System.out.println(s.getGender());
+            System.out.println(s);
+
+            Field age=stu.getDeclaredField("age");
+            age.setAccessible(true);
+            age.set(s,99);//set第一个参数是对象
+            System.out.println(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void test5(){
+        try {
+            Class<?> stu=Class.forName("Student");
+            Constructor<?> con=stu.getDeclaredConstructor(String.class);
+
+            //如果构造器是私有的，不能直接用来实例化对象
+            con.setAccessible(true);//将构造器访问权限设置为公有的
+            Student s=(Student)con.newInstance("jack");
+
+            Field gender=stu.getDeclaredField("gender");
+            System.out.println(gender);//私有属性
+
+            //反射属性
+            //修改gender属性-->修改哪个实例的属性：s
+            gender.setAccessible(true);
+            gender.set(s,"人妖");
+            System.out.println(s.getGender());
+            System.out.println(s);
+
+            Field age=stu.getDeclaredField("age");
+            age.setAccessible(true);
+            age.set(s,99);//set第一个参数是对象
+            System.out.println(s);
+
+            //反射方法
+            Method setAge=stu.getDeclaredMethod("setAge",int.class);
+            setAge.invoke(s,200);
+            Method getAge=stu.getDeclaredMethod("getAge");
+            getAge.setAccessible(true);
+            System.out.println(getAge.invoke(s));
+            System.out.println(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void main(String[] args) throws ClassNotFoundException {
+        //  test1();
+         //test2();
+        //test3();
+        //test4();
+        test5();
+        Student s=new Student("HHH","男",23);
+
+    }
+}
