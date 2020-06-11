@@ -1,0 +1,20 @@
+输入一个整型数组，数组里有正数也有负数。数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。
+
+要求时间复杂度为O(n)。
+
+
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int s=nums[0];
+        int max=nums[0];
+        int i=1;
+        for(;i<nums.length;i++){
+            s=Math.max(s+nums[i],nums[i]);
+            if(max<s){
+                max=s;
+            }
+        }
+        return max;
+    }
+}
