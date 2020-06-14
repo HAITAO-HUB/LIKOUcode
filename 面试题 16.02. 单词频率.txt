@@ -1,0 +1,30 @@
+设计一个方法，找出任意指定单词在一本书中的出现频率。
+
+import java.util.Map;
+import java.util.HashMap;
+
+class WordsFrequency {
+    Map<String,Integer> s=new HashMap<>();
+    public WordsFrequency(String[] book) {
+        for(int i=0;i<book.length;i++){
+            if(!s.containsKey(book[i])){
+                s.put(book[i],1);
+            }
+            else{
+                s.put(book[i],s.get(book[i])+1);
+            }
+        }
+    }
+    
+    public int get(String word) {
+        if(s.containsKey(word))
+        return s.get(word);
+        return 0;
+    }
+}
+
+/**
+ * Your WordsFrequency object will be instantiated and called as such:
+ * WordsFrequency obj = new WordsFrequency(book);
+ * int param_1 = obj.get(word);
+ */
