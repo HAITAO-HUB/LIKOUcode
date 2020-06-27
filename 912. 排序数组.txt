@@ -1,0 +1,20 @@
+给你一个整数数组 nums，请你将该数组升序排列
+
+class Solution {
+    public int[] sortArray(int[] nums) {
+        int gap=3;
+        while(gap>0){
+            for(int i=gap;i<nums.length;i++){
+                int key=nums[i];
+                int end=i-gap;
+                while(end>=0&&key<nums[end]){
+                    nums[end+gap]=nums[end];
+                    end-=gap;
+                }
+                nums[end+gap]=key;
+            }
+            gap--;
+        }
+        return nums;
+    }
+}
