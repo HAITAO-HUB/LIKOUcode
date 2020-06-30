@@ -1,0 +1,30 @@
+给定一棵二叉搜索树，请找出其中第k大的节点。
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+     int cnt=0,key=0;
+    public int kthLargest(TreeNode root, int k) {
+        cnt=k;
+        dfs(root);
+        return key;
+    }
+    public  void dfs(TreeNode root)
+    {
+        if(root==null||cnt==0)
+            return;
+        dfs(root.right);
+        if(--cnt==0){
+            key=root.val;
+            return;
+        }
+        dfs(root.left);
+    }
+}
