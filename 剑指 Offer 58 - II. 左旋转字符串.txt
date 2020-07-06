@@ -1,0 +1,23 @@
+字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。
+请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
+
+ 
+
+
+class Solution {
+    public String reverseLeftWords(String s, int n) {
+        int len=n;
+        if(n>s.length())
+            len=n%s.length();
+        StringBuffer buf1=new StringBuffer();
+        StringBuffer buf2=new StringBuffer();
+        for(int i=0;i<s.length();i++){
+            if(i<len)
+                buf1.append(s.charAt(i));
+            else
+                buf2.append(s.charAt(i));
+        }
+        buf2.append(buf1);
+        return buf2.toString();
+    }
+}
