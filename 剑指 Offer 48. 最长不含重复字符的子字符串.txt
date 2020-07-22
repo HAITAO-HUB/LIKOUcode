@@ -1,0 +1,38 @@
+请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。《这个题是看力扣题解的，当时没写出来》
+
+ 
+示例 1:
+
+输入: "abcabcbb"
+输出: 3 
+解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+
+示例 2:
+
+输入: "bbbbb"
+输出: 1
+解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int left = 0;
+        int right = 0;
+        int res = 0;
+        while (right < s.length()) {
+            char ch = s.charAt(right);
+            // 当前值已经出现过了，更新左边界
+            if (map.containsKey(ch)) {
+                // 另 left = 当前值最后一次出现的地方 + 1 ，使得[left,right]无重复值
+                // 需要取较大值
+                left = Math.max(left, map.get(ch) + 1);
+            }
+            //更新最后出现下标
+            map.put(ch, right);
+            // [left,right]的长度
+            res = Math.max(res, right - left + 1);
+            right++;
+        }
+           return res;
+    }
+}
