@@ -1,0 +1,39 @@
+
+
+//字符串翻转
+import java.util.Scanner;
+public class demo2 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        while (scan.hasNext()) {// 注意，如果输入是多个测试用例，请通过while循环处理多个测试用例
+            String s=scan.nextLine();
+            boolean flag=false;
+            StringBuffer f=new StringBuffer();
+            for(int i=0;i<s.length();i++){
+                if(s.charAt(i)==' '&&flag!=true){
+                    f.append(s.charAt(i));
+                    flag=true;
+                }
+                else if(s.charAt(i)==' '&&flag==true){
+                    continue;
+                }
+                else{
+                    f.append(s.charAt(i));
+                    flag=false;
+                }
+            }
+            String p=f.toString();
+            String[] arr=p.split(" ");
+            StringBuffer buf=new StringBuffer();
+            for(int i=0;i<arr.length;i++){
+                String k=arr[i];
+                for(int j=k.length()-1;j>=0;j--){
+                    buf.append(k.charAt(j));
+                }
+                if(i!=arr.length-1)
+                    buf.append(" ");
+            }
+            System.out.println(buf.toString());
+        }
+    }
+}
