@@ -12,6 +12,7 @@ class Solution {
 
         while(a>0){
             a--;
+            //a个b相加，每次进循环后a--，返回时加b
             return b+multiply(a,b);
         }
         return 0;
