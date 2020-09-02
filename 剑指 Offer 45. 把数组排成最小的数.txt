@@ -1,0 +1,40 @@
+输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。
+
+ 
+
+示例 1:
+
+输入: [10,2]
+输出: "102"
+示例 2:
+
+输入: [3,30,34,5,9]
+输出: "3033459"
+
+ 
+
+class Solution {
+    public String minNumber(int[] nums) {
+         String[] arr=new String[nums.length];
+        for(int i=0;i<nums.length;i++){
+            arr[i]=String.valueOf(nums[i]);
+        }
+        sort(arr);
+        StringBuffer buf=new StringBuffer();
+        for(int i=0;i<arr.length;i++){
+            buf.append(arr[i]);
+        }
+        return buf.toString();
+    }
+     public static void sort(String[] arr){
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr.length-i-1;j++){
+                if((arr[j]+arr[j+1]).compareTo(arr[j+1]+arr[j])>0){
+                    String a=arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=a;
+                }
+            }
+        }
+    }
+}
