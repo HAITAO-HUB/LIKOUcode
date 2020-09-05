@@ -10,6 +10,14 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+思路：
+广度优先搜索（BFS），通常借助队列来实现
+创建一个Queue和ArrayList
+队列为空跳出
+每次从队列中取一个元素，将其val放入数组，再分别将该节点的左右孩子入队，
+循环操作~
+
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
