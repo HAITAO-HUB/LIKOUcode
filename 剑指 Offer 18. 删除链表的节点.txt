@@ -13,14 +13,17 @@
  *     ListNode(int x) { val = x; }
  * }
  */
+
 class Solution {
     public ListNode deleteNode(ListNode head, int val) {
      if(head.val==val)
-     return head.next;
+        return head.next;
      ListNode node=head;
      while(node.next.val!=val){
+//循环找到要删除的节点
          node=node.next;
      }
+//跳过要删除的节点
      node.next=node.next.next;
      return head;
     }
