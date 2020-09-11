@@ -14,6 +14,7 @@
  * }
  */
 class Solution {
+//递归找节点
     public boolean getNodePath(TreeNode root,TreeNode node,Stack<TreeNode> ret){
         if(root==null){
             return false;
@@ -25,9 +26,12 @@ class Solution {
         if(getNodePath(root.left,node,ret)||getNodePath(root.right,node,ret)){
             return true;
         }
+//没找到，把根节点出栈，返回false
         ret.pop();
         return false;
     }
+
+
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root==null||p==null||q==null){
             return null;
@@ -48,10 +52,12 @@ class Solution {
                 sizep--;
             }
             else{
+//栈顶元素相同，说明找到了
                 if(pStack.peek()==qStack.peek()){
                     return pStack.peek();
                 }
                 else{
+//不相同，出栈，继续循环
                     pStack.pop();
                     qStack.pop();
                 }
